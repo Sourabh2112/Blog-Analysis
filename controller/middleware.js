@@ -15,7 +15,9 @@ module.exports = async (req, res, next) => {
     req.blogs = jsonResponse.blogs;
     next();
   } catch (err) {
-    console.log("ERROR", err);
+    res.json({
+      message : err 
+    })
   }
 
   //   res.status(200).json({});

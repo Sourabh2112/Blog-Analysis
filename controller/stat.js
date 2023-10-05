@@ -1,9 +1,9 @@
 const lodash = require("lodash");
 
 module.exports = (req, res) => {
-  console.log("data retrived succefully");
+  // console.log("data retrived succefully");
   const blogs = req.blogs;
-
+  try {
   // Calculate the total number of blogs fetched
   const blogSize = lodash.size(blogs);
 
@@ -19,6 +19,7 @@ module.exports = (req, res) => {
 
   // Create an array of unique blog titles (no duplicates)
   const uniqueBlogTitles = lodash.uniqBy(blogs, "title").map((blog) => blog.title);
+  
 
   res.status(200).json({
     longestTitle: longestTitle,
@@ -26,4 +27,9 @@ module.exports = (req, res) => {
     numberOfBlogsWithPrivacy: numberOfBlogsWithPrivacy,
     uniqueBlogTitles: uniqueBlogTitles,
   });
+  } catch (error) {
+      res.json({
+        message : err
+      })
+  }
 };
